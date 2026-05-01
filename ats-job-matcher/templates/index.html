@@ -51,8 +51,17 @@
         ></textarea>
       </div>
 
+
+      
+
       <!-- JOB DESCRIPTION -->
       <div class="input-card">
+        <label for="target-role">Target Role</label>
+            <input
+            type="text"
+            id="target-role"
+            placeholder="e.g. Software Developer, Embedded Engineer, IoT Developer..."
+            />
         <label for="jd">Job Description</label>
         <textarea
           id="jd"
@@ -209,6 +218,36 @@
       </div>
 
     </div>
+    </div>
+
+    <!-- =========================
+        SCAN HISTORY DASHBOARD
+    ========================= -->
+    <div class="history-section">
+
+
+
+        
+        <h2>Previous Scan History</h2>
+
+        <div class="history-stats">
+            <p id="total-scans">Total Scans: -</p>
+            <p id="avg-score">Average Score: -</p>
+            <p id="best-score">Best Score: -</p>
+        </div>
+
+        <div class="history-list" id="history-list">
+            <p>No scan history yet.</p>
+        </div>
+        <button class="clear-history-btn" onclick="clearHistory()">
+        Clear Scan History
+        </button>
+
+
+    </div>
+
+
+
   </div>
 
   <script src="/static/script.js"></script>

@@ -50,6 +50,7 @@ function handlePDF(input) {
 async function analyze() {
   const resume = document.getElementById("resume").value.trim();
   const jd = document.getElementById("jd").value.trim();
+  const targetRole = document.getElementById("target-role").value.trim();
 
   // =========================
   // VALIDATION
@@ -81,6 +82,7 @@ async function analyze() {
     }
 
     formData.append("jd", jd);
+    formData.append("target_role", targetRole);
 
     // =========================
     // API CALL
@@ -446,6 +448,7 @@ async function analyze() {
     // SHOW RESULTS
     // =========================
     document.getElementById("results").style.display = "block";
+    loadHistory();
 
     document.getElementById("results").scrollIntoView({
       behavior: "smooth",
@@ -462,3 +465,93 @@ async function analyze() {
     alert("Error: " + error.message);
   }
 }
+
+// =========================
+// LOAD SCAN HISTORY
+// =========================
+async function loadHistory() {
+  try {
+    const historyRes = await fetch("/api/history");
+    const statsRes = await fetch("/api/stats");
+
+    const historyData = await historyRes.json();
+    const statsData = await statsRes.json();
+
+    const historyList = document.getElementById("history-list");
+    const totalScans = document.getElementById("total-scans");
+    const avgScore = document.getElementById("avg-score");
+    const bestScore = document.getElementById("best-score");
+    
+
+    if (!historyList || !totalScans || !avgScore || !bestScore) return;
+
+    // Stats
+    if (statsData.success) {
+      totalScans.textContent = `Total Scans: ${statsData.data.total_scans}`;
+      avgScore.textContent = `Average Score: ${statsData.data.average_score}%`;
+      bestScore.textContent = `Best Score: ${statsData.data.highest_score}%`;
+    }
+
+    // History
+    historyList.innerHTML = "";
+
+    if (!historyData.data || historyData.data.length === 0) {
+      historyList.innerHTML = "<p>No scan history yet.</p>";
+      return;
+    }
+
+    historyData.data.forEach((scan) => {
+      const item = document.createElement("div");
+      item.className = "history-item";
+
+      item.innerHTML = `
+        <span class="history-score">${scan.target_role || "not mention Role "} - ATS: ${scan.score}%</span>
+        <span>Matched: ${scan.matched_count}</span>
+        <span>Missing: ${scan.missing_count}</span>
+        <span class="history-date">${scan.timestamp}</span>
+      `;
+
+      historyList.appendChild(item);
+    });
+
+  } catch (error) {
+    console.error("History Load Error:", error);
+  }
+}
+
+
+// =========================
+// CLEAR HISTORY
+// =========================
+async function clearHistory() {
+  const confirmClear = confirm("Are you sure you want to delete all scan history?");
+
+  if (!confirmClear) return;
+
+  try {
+    const response = await fetch("/api/clear-history", {
+      method: "DELETE"
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      loadHistory();
+      alert("Scan history cleared successfully!");
+    } else {
+      alert("Failed to clear history.");
+    }
+
+  } catch (error) {
+    console.error("Clear History Error:", error);
+    alert("Something went wrong.");
+  }
+}
+
+
+// =========================
+// INITIAL LOAD
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  loadHistory();
+});

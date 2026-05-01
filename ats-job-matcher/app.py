@@ -26,6 +26,7 @@ class ScanHistory(db.Model):
     missing_keywords = db.Column(db.Text)
     format_score = db.Column(db.Float)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    target_role = db.Column(db.String(100))
 
     def to_dict(self):
         return {
@@ -36,6 +37,7 @@ class ScanHistory(db.Model):
             'matched_keywords': self.matched_keywords.split(',') if self.matched_keywords else [],
             'missing_keywords': self.missing_keywords.split(',') if self.missing_keywords else [],
             'format_score': self.format_score,
+            'target_role': self.target_role,
             'timestamp': self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         }
 
@@ -84,6 +86,7 @@ def analyze():
     try:
         resume_text = ""
         jd_text = request.form.get('jd', '').strip()
+        target_role = request.form.get("target_role", "").strip()
 
         # =========================
         # PDF UPLOAD
@@ -151,7 +154,8 @@ def analyze():
             missing_count=len(missing),
             matched_keywords=",".join(matched),
             missing_keywords=",".join(missing),
-            format_score=format_score
+            format_score=format_score,
+            target_role=target_role
         )
 
         db.session.add(scan)
@@ -254,6 +258,30 @@ def get_stats():
             'lowest_score': min(scores)
         }
     }), 200
+# =========================
+# CLEAR SCAN HISTORY
+# =========================
+@app.route("/api/clear-history", methods=["DELETE"])
+def clear_history():
+    try:
+        ScanHistory.query.delete()
+        db.session.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "Scan history cleared successfully"
+        }), 200
+
+    except Exception as e:
+        db.session.rollback()
+
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
+
 
 # =========================
 # RUN APP
