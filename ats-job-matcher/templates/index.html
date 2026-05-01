@@ -26,16 +26,43 @@
   <!-- INPUT SECTION -->
   <div class="container">
     <div class="input-grid">
+
+      <!-- RESUME -->
       <div class="input-card">
-        <label>Your Resume</label>
-        <textarea id="resume" placeholder="Paste your full resume text here..."></textarea>
+        <label for="pdf-input">Your Resume</label>
+
+        <div class="upload-box" id="upload-box" onclick="document.getElementById('pdf-input').click()">
+          <p>📄 Click to upload PDF</p>
+          <span id="pdf-name">or paste text below</span>
+        </div>
+
+        <input
+          type="file"
+          id="pdf-input"
+          accept=".pdf"
+          style="display:none"
+          onchange="handlePDF(this)"
+        />
+
+        <label for="resume">Resume Text</label>
+        <textarea
+          id="resume"
+          placeholder="Or paste your full resume text here..."
+        ></textarea>
       </div>
+
+      <!-- JOB DESCRIPTION -->
       <div class="input-card">
-        <label>Job Description</label>
-        <textarea id="jd" placeholder="Paste the job description from LinkedIn/Naukri..."></textarea>
+        <label for="jd">Job Description</label>
+        <textarea
+          id="jd"
+          placeholder="Paste the job description from LinkedIn/Naukri..."
+        ></textarea>
       </div>
+
     </div>
 
+    <!-- ANALYZE BUTTON -->
     <button class="analyze-btn" onclick="analyze()">
       Analyze My ATS Score
     </button>
@@ -51,19 +78,60 @@
 
       <!-- SCORE CARDS -->
       <div class="score-grid">
+
+        <!-- MAIN SCORE -->
         <div class="score-card main-score">
-          <p class="card-label">ATS Score</p>
-          <p class="card-value" id="score-value">0%</p>
-          <p class="card-status" id="score-status">-</p>
+            <p class="card-label">ATS Score</p>
+            <p class="card-value" id="score-value">0%</p>
+            <p class="card-status" id="score-status">-</p>
+
+            <p class="confidence-level" id="confidence-level">
+                Confidence: -
+            </p>
+
+            <p class="benchmark-level" id="benchmark-level">
+                Benchmark: -
+            </p>
+
+            <p class="verdict-badge" id="verdict-badge">
+                Verdict: -
+            </p>
+
+            <p class="readiness-level" id="readiness-level">
+                Resume Readiness: -
+            </p>
         </div>
+
+        <!-- MATCHED -->
         <div class="score-card">
           <p class="card-label">Matched Keywords</p>
           <p class="card-value green" id="matched-count">0</p>
         </div>
+
+        <!-- MISSING -->
         <div class="score-card">
           <p class="card-label">Missing Keywords</p>
           <p class="card-value red" id="missing-count">0</p>
         </div>
+
+        <!-- TECH SCORE -->
+        <div class="score-card">
+          <p class="card-label">Technical Match</p>
+          <p class="card-value blue" id="tech-score">0%</p>
+        </div>
+
+        <!-- FORMAT SCORE -->
+        <div class="score-card">
+          <p class="card-label">Formatting Score</p>
+          <p class="card-value purple" id="format-score">0%</p>
+        </div>
+
+        <!-- TRUST SCORE -->
+        <div class="score-card">
+        <p class="card-label">Resume Trust Score</p>
+        <p class="card-value blue" id="trust-score">0%</p>
+        </div>
+
       </div>
 
       <!-- PROGRESS BAR -->
@@ -72,6 +140,7 @@
           <span>Match Progress</span>
           <span id="progress-label">0%</span>
         </div>
+
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
         </div>
@@ -82,21 +151,67 @@
         <span id="advice-text"></span>
       </div>
 
+
+<!-- SUGGESTIONS -->
+        <div class="advice-box suggestions-box" id="suggestions-box">
+            <p class="keyword-title">Top Improvements</p>
+            <div id="suggestions-list"></div>
+        </div>
+        <!-- SCORE BREAKDOWN -->
+        <div class="keywords-grid breakdown-grid">
+
+            <div class="keyword-card">
+                <p class="keyword-title blue">Technical Analysis</p>
+                <p id="tech-analysis-text">Waiting for scan...</p>
+            </div>
+
+            <div class="keyword-card">
+                <p class="keyword-title purple">Formatting Analysis</p>
+                <p id="format-analysis-text">Waiting for scan...</p>
+            </div>
+
+            <div class="keyword-card">
+            <p class="keyword-title blue">Resume Trust Analysis</p>
+            <p id="trust-analysis-text">Waiting for scan...</p>
+            </div>
+
+        </div>
+
+        <!-- WHY SCORE -->
+        <div class="advice-box why-score-box" id="why-score-box">
+        <p class="keyword-title">Why Your Score</p>
+        <div id="why-score-list"></div>
+        </div>
+
+    <!-- PRIORITY FIXES -->
+    <div class="advice-box priority-box" id="priority-box">
+    <p class="keyword-title">Priority Fixes</p>
+    <div id="priority-list"></div>
+    </div>
+
       <!-- KEYWORDS -->
       <div class="keywords-grid">
+
+        <!-- MATCHED KEYWORDS -->
         <div class="keyword-card">
           <p class="keyword-title green">Matched Keywords</p>
           <div class="badges" id="matched-badges"></div>
         </div>
+
+        <!-- MISSING KEYWORDS -->
         <div class="keyword-card">
           <p class="keyword-title red">Missing Keywords</p>
           <div class="badges" id="missing-badges"></div>
         </div>
+
+        
+
       </div>
 
     </div>
   </div>
 
   <script src="/static/script.js"></script>
+
 </body>
 </html>

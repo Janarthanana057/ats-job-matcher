@@ -184,6 +184,7 @@ body {
   border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-label {
@@ -300,4 +301,363 @@ body {
   background: #2E0D0D;
   color: #E24B4A;
   border: 1px solid #E24B4A;
+}
+/* PDF UPLOAD */
+.upload-box {
+  background: #0F1117;
+  border: 1px dashed #2A2D3A;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+
+.upload-box:hover {
+  border-color: #1A3C6E;
+}
+
+.upload-box p {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.upload-box span {
+  font-size: 11px;
+  color: #555;
+}
+
+.upload-box.active {
+  border-color: #1D9E75;
+}
+
+.upload-box.active p {
+  color: #1D9E75;
+}
+/* =========================
+   EXTRA SCORE COLORS
+========================= */
+.blue {
+  color: #4A90E2;
+}
+
+.purple {
+  color: #9B59B6;
+}
+
+/* =========================
+   SUGGESTIONS BOX
+========================= */
+.suggestions-box {
+  margin-top: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  border-radius: 16px;
+  padding: 18px;
+  animation: fadeSlideUp 0.8s ease;
+}
+
+#suggestions-list {
+  margin-top: 10px;
+}
+
+.suggestion-item {
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.88);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+/* =========================
+   SCORE CARD HOVER
+========================= */
+
+.score-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   PROGRESS BAR ANIMATION
+========================= */
+.progress-bar {
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.progress-fill {
+  width: 0%;
+  transition: width 1.5s ease-in-out;
+}
+
+/* =========================
+   RESULTS FADE IN
+========================= */
+.results {
+  animation: fadeSlideUp 0.8s ease;
+}
+
+/* =========================
+   BUTTON PREMIUM EFFECT
+========================= */
+.analyze-btn {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.analyze-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   UPLOAD BOX ACTIVE
+========================= */
+.upload-box.active {
+  border-color: #1D9E75;
+  box-shadow: 0 0 15px rgba(29,158,117,0.25);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* =========================
+   BREAKDOWN GRID
+========================= */
+.breakdown-grid {
+  margin-top: 24px;
+}
+
+/* =========================
+   ANALYSIS TEXT
+========================= */
+#tech-analysis-text,
+#format-analysis-text {
+  margin-top: 10px;
+  line-height: 1.7;
+  font-size: 0.96rem;
+  color: rgba(255,255,255,0.88);
+}
+
+/* =========================
+   BREAKDOWN CARD ENHANCED
+========================= */
+.breakdown-grid .keyword-card {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  animation: fadeSlideUp 0.8s ease;
+}
+
+/* =========================
+   PROFESSIONAL GLASS EFFECT
+========================= */
+.keyword-card,
+.score-card,
+.advice-box {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* =========================
+   RESPONSIVE IMPROVEMENT
+========================= */
+@media (max-width: 768px) {
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================
+   CONFIDENCE LEVEL
+========================= */
+.confidence-level {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  opacity: 0.9;
+}
+
+/* =========================
+   MAIN SCORE CARD POLISH
+========================= */
+.main-score {
+  position: relative;
+  overflow: hidden;
+}
+
+.main-score::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 140px;
+  height: 140px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+
+/* =========================
+   SCORE STATUS IMPROVED
+========================= */
+.card-status {
+  font-weight: 600;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+/* =========================
+   BENCHMARK LEVEL
+========================= */
+.benchmark-level {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.88;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   MAIN SCORE TEXT SPACING
+========================= */
+.main-score .confidence-level,
+.main-score .benchmark-level {
+  text-align: center;
+}
+
+/* =========================
+   MAIN SCORE VALUE
+========================= */
+.main-score .card-value {
+  margin-bottom: 6px;
+}
+
+/* =========================
+   WHY SCORE BOX
+========================= */
+.why-score-box {
+  margin-top: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+  border-radius: 16px;
+  padding: 18px;
+  animation: fadeSlideUp 0.9s ease;
+}
+
+#why-score-list {
+  margin-top: 10px;
+}
+
+#why-score-list .suggestion-item {
+  line-height: 1.7;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.9);
+}
+
+/* =========================
+   SECTION STACK SPACING
+========================= */
+.suggestions-box,
+.why-score-box {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   PRIORITY FIXES BOX
+========================= */
+.priority-box {
+  margin-top: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  padding: 18px;
+  animation: fadeSlideUp 1s ease;
+}
+
+#priority-list {
+  margin-top: 10px;
+}
+
+#priority-list .suggestion-item {
+  line-height: 1.75;
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.92);
+}
+
+/* =========================
+   STACKED DASHBOARD SECTIONS
+========================= */
+.priority-box,
+.why-score-box,
+.suggestions-box {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* =========================
+   VERDICT BADGE
+========================= */
+.verdict-badge {
+  margin-top: 10px;
+  padding: 8px 14px;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 999px;
+  letter-spacing: 0.4px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =========================
+   MAIN SCORE STACK
+========================= */
+.main-score .verdict-badge {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================
+   TRUST ANALYSIS
+========================= */
+#trust-analysis-text {
+  margin-top: 10px;
+  line-height: 1.7;
+  font-size: 0.96rem;
+  color: rgba(255,255,255,0.88);
+}
+/* =========================
+   RESUME READINESS
+========================= */
+.readiness-level {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  opacity: 0.92;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   MAIN SCORE STACK
+========================= */
+.main-score .readiness-level {
+  text-align: center;
 }
