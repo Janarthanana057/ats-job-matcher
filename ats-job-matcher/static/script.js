@@ -59,13 +59,17 @@ async function analyze() {
   // VALIDATION
   // =========================
   if (!jd) {
-    alert("Please fill the Job Description!");
-    return;
+  alert("Please fill the Job Description!");
+  analyzeBtn.disabled = false;
+  analyzeBtn.textContent = "Analyze My ATS Score";
+  return;
   }
 
   if (!resume && !pdfFile) {
-    alert("Please upload a PDF or paste your resume text!");
-    return;
+  alert("Please upload a PDF or paste your resume text!");
+  analyzeBtn.disabled = false;
+  analyzeBtn.textContent = "Analyze My ATS Score";
+  return;
   }
 
   /// =========================
@@ -496,6 +500,8 @@ async function analyze() {
     document.getElementById("results").scrollIntoView({
       behavior: "smooth",
     });
+    analyzeBtn.disabled = false;
+    analyzeBtn.textContent = "Analyze My ATS Score";
 
   } catch (error) {
     // Reset loader safely
@@ -508,6 +514,11 @@ async function analyze() {
     if (loadingFill) loadingFill.style.width = "0%";
     if (loadingPercent) loadingPercent.textContent = "0%";
     if (loadingText) loadingText.textContent = "Analyzing your resume...";
+
+    // Reset button
+    analyzeBtn.disabled = false;
+    analyzeBtn.textContent = "Analyze My ATS Score";
+
 
     // Debug
     console.error("Analyze Error:", error);
