@@ -754,7 +754,247 @@ body {
   font-size: 0.95rem;
 }
 
+
+
+
+
+/* CENTER JS BRAND */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brand-js {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #4facfe, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulse 2.8s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.7;
+    text-shadow: 0 0 4px rgba(255,255,255,0.2);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6);
+  }
+  100% {
+    opacity: 0.7;
+    text-shadow: 0 0 4px rgba(255,255,255,0.2);
+  }
+}
+
+.analyze-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 172, 254, 0.25);
+}
+
+
 /* =========================
-   previce histry cleared
+   FOOTER
+========================= */
+.footer {
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  border-top: 1px solid #2A2D3A;
+  color: rgba(255,255,255,0.85);
+}
+
+.footer-links {
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.footer-links a:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+.footer-credit {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  opacity: 0.85;
+}
+
+
+/* =========================
+mobile version
+
 
 ========================= */
+/* =========================
+   MOBILE RESPONSIVE FIX
+========================= */
+@media (max-width: 768px) {
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .nav-logo,
+  .nav-center,
+  .nav-tag {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero {
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  .hero p {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+
+  .input-grid,
+  .score-grid,
+  .keywords-grid,
+  .breakdown-grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .input-card,
+  .score-card,
+  .keyword-card,
+  .advice-box,
+  .history-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+  textarea,
+  input[type="text"] {
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .analyze-btn,
+  .clear-history-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  .progress-section {
+    width: 100%;
+  }
+
+  .history-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .footer {
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .footer-links a {
+    width: 100%;
+    max-width: 220px;
+    text-align: center;
+  }
+
+  .loader {
+    padding: 20px;
+  }
+
+  .loading-progress-bar {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  .brand-js {
+    font-size: 28px;
+  }
+
+
+
+
+
+
+  
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  position: static !important;
+  transform: none !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.nav-center {
+  order: 2;
+}
+
+.nav-right {
+  order: 3;
+}
+
+.brand-js {
+  font-size: 22px;
+  margin: 4px 0;
+}
+}

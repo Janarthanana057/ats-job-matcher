@@ -48,6 +48,9 @@ function handlePDF(input) {
 // MAIN ANALYZE FUNCTION
 // =========================
 async function analyze() {
+  const analyzeBtn = document.querySelector(".analyze-btn");
+  analyzeBtn.disabled = true;
+  analyzeBtn.textContent = "Analyzing...";
   const resume = document.getElementById("resume").value.trim();
   const jd = document.getElementById("jd").value.trim();
   const targetRole = document.getElementById("target-role").value.trim();
@@ -65,10 +68,38 @@ async function analyze() {
     return;
   }
 
-  // =========================
+  /// =========================
   // SHOW LOADER
   // =========================
-  document.getElementById("loader").style.display = "block";
+  document.getElementById("loader").style.display = "flex";
+
+  const loadingFill = document.getElementById("loading-progress-fill");
+  const loadingPercent = document.getElementById("loading-percent");
+  const loadingText = document.getElementById("loading-text");
+
+  let progress = 0;
+
+  const progressInterval = setInterval(() => {
+    if (progress < 95) {
+      progress += Math.floor(Math.random() * 8) + 1;
+
+      if (progress > 95) progress = 95;
+
+      loadingFill.style.width = `${progress}%`;
+      loadingPercent.textContent = `${progress}%`;
+
+      if (progress < 25) {
+        loadingText.textContent = "Parsing Resume...";
+      } else if (progress < 50) {
+        loadingText.textContent = "Matching Keywords...";
+      } else if (progress < 75) {
+        loadingText.textContent = "Scoring ATS...";
+      } else {
+        loadingText.textContent = "Finalizing Report...";
+      }
+    }
+  }, 120);
+
   document.getElementById("results").style.display = "none";
 
   try {
@@ -99,14 +130,26 @@ async function analyze() {
     const responseData = await response.json();
     const data = responseData.data || responseData;
 
-    // Hide loader
-    document.getElementById("loader").style.display = "none";
+    clearInterval(progressInterval);
+
+    loadingFill.style.width = "100%";
+    loadingPercent.textContent = "100%";
+    loadingText.textContent = "Analysis Complete!";
+
+    setTimeout(() => {
+      loadingText.textContent = "Analyzing your resume...";
+      loadingFill.style.width = "0%";
+      loadingPercent.textContent = "0%";
+    }, 400);
+
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+    }, 500);
 
     if (data.error) {
       alert(data.error);
       return;
     }
-
     // =========================
     // EXTRACT DATA
     // =========================
@@ -455,8 +498,16 @@ async function analyze() {
     });
 
   } catch (error) {
-    // Hide loader
+    // Reset loader safely
     document.getElementById("loader").style.display = "none";
+
+    const loadingFill = document.getElementById("loading-progress-fill");
+    const loadingPercent = document.getElementById("loading-percent");
+    const loadingText = document.getElementById("loading-text");
+
+    if (loadingFill) loadingFill.style.width = "0%";
+    if (loadingPercent) loadingPercent.textContent = "0%";
+    if (loadingText) loadingText.textContent = "Analyzing your resume...";
 
     // Debug
     console.error("Analyze Error:", error);
